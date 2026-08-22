@@ -6,8 +6,6 @@ import CommentSheet from "../components/CommentSheet";
 import "./BlogList.css";
 import ShareButton from "./sharebutton";
 
-const API_URL = "https://sky-dlae.onrender.com";
-
 const CONTENT_CHAR_LIMIT = 150;
 
 const CATEGORIES = [
@@ -60,7 +58,7 @@ export default function BlogList({ search }) {
         if (activeCategory !== "all") params.append("category", activeCategory);
 
         const res = await axios.get(
-          `${API_URL}/api/posts?${params.toString()}`,
+          `http://localhost:5000/api/posts?${params.toString()}`,
           { headers: token ? { Authorization: `Bearer ${token}` } : {} }
         );
         setPosts(res.data.posts);
@@ -78,7 +76,7 @@ export default function BlogList({ search }) {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        `${API_URL}/api/bookmarks/${postId}`,
+        `http://localhost:5000/api/bookmarks/${postId}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -104,7 +102,7 @@ export default function BlogList({ search }) {
 
     try {
       const res = await axios.post(
-        `${API_URL}/api/likes/${postId}`,
+        `http://localhost:5000/api/likes/${postId}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -127,151 +125,166 @@ export default function BlogList({ search }) {
   };
 
   return (
-    <div className="blog-list-container">
-      <div className="category-tabs">
-        {CATEGORIES.map((cat) => (
-          <button
-            key={cat.key}
-            className={`category-pill ${activeCategory === cat.key ? "category-pill--active" : ""}`}
-            onClick={() => setActiveCategory(cat.key)}
-          >
-            {cat.label}
-          </button>
-        ))}
-      </div>
+  <div className="blog-list-container">
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          {error && <p className="error-message">{error}</p>}
+    {/* Categories */}
+    <div className="category-tabs">
+      {CATEGORIES.map((cat) => (
+        <button
+          key={cat.key}
+          className={`category-pill ${
+            activeCategory === cat.key ? "category-pill--active" : ""
+          }`}
+          onClick={() => setActiveCategory(cat.key)}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
 
-          {posts.length === 0 ? (
-            <div className="empty-state">
-              {search ? (
-                <>
-                  <h2>No posts found</h2>
-                  <p>
-                    We couldn't find any aviation posts matching <strong>"{search}"</strong>.
-                  </p>
-                </>
-              ) : (
-                <>
-                  <h2>No posts yet</h2>
-                  <p>Be the first person to share an aviation story.</p>
-                </>
-              )}
-            </div>
-          ) : (
-            posts.map((post) => {
-              const isExpanded = !!expandedPosts[post.id];
-              const plainText = post.content.replace(/<[^>]*>/g, "");
+    {/* Posts */}
+    {loading ? (
+      <p>Loading...</p>
+    ) : (
+      <>
+        {error && <p className="error-message">{error}</p>}
 
-              const isLong = plainText.length > CONTENT_CHAR_LIMIT;
+        {posts.length === 0 ? (
+          <div className="empty-state">
+            {search ? (
+              <>
+                <h2>No posts found</h2>
+                <p>
+                  We couldn't find any aviation posts matching{" "}
+                  <strong>"{search}"</strong>.
+                </p>
+              </>
+            ) : (
+              <>
+                <h2>No posts yet</h2>
+                <p>Be the first person to share an aviation story.</p>
+              </>
+            )}
+          </div>
+        ) : (
+          posts.map((post) => {
+            const isExpanded = !!expandedPosts[post.id];
 
-              const displayContent =
-                isExpanded || !isLong
-                  ? plainText
-                  : plainText.slice(0, CONTENT_CHAR_LIMIT) + "...";
+            const plainText = post.content.replace(/<[^>]*>/g, "");
 
-              return (
-                <Link
-                  to={`/blog/${post.id}`}
-                  key={post.id}
-                  className="post-item-link"
-                >
-                  <div className="post-item">
-                    {/* Image */}
-                    {post.image && (
-                      <img
-                        src={`${API_URL}${post.image}`}
-                        alt={post.title}
-                        className="post-image"
-                      />
-                    )}
+            const isLong = plainText.length > CONTENT_CHAR_LIMIT;
 
-                    {/* Title */}
-                    <h2 className="post-title">{post.title}</h2>
-                    <p className="post-content">
-                      {displayContent}
+            const displayContent =
+              isExpanded || !isLong
+                ? plainText
+                : plainText.slice(0, CONTENT_CHAR_LIMIT) + "...";
 
-                      {isLong && (
-                        <button
-                          className="read-more-btn"
-                          onClick={(e) => toggleExpand(post.id, e)}
-                        >
-                          {isExpanded ? " Show less" : " Read more"}
-                        </button>
-                      )}
-                    </p>
+            return (
+              <Link
+                to={`/blog/${post.id}`}
+                key={post.id}
+                className="post-item-link"
+              >
+                <div className="post-item">
 
-                    {/* Author info */}
-                    <p className="post-author">
-                      By {post.author_name} • {timeAgo(post.created_at)}
-                    </p>
+                  {post.image && (
+                    <img
+                      src={`http://localhost:5000${post.image}`}
+                      alt={post.title}
+                      className="post-image"
+                    />
+                  )}
 
-                    {/* Action Bar */}
-                    <div className="post-actions">
-                      <div className="left-actions">
-                        {/* Like Button */}
-                        <button
-                          className="action-btn"
-                          onClick={(e) => handleLikeToggle(post.id, e)}
-                        >
-                          <Heart
-                            size={18}
-                            fill={post.user_liked ? "#e33" : "none"}
-                            color={post.user_liked ? "#e33" : "#666"}
-                          />
-                          {post.like_count}
-                        </button>
+                  <h2 className="post-title">{post.title}</h2>
 
-                        {/* Comment Button */}
-                        <button
-                          className="action-btn"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            setActiveCommentPostId(post.id);
-                          }}
-                        >
-                          <MessageCircle size={18} />
-                          {post.comment_count ?? 0}
-                        </button>
-                      </div>
+                  <p className="post-content">
+                    {displayContent}
 
-                      <ShareButton postId={post.id} postTitle={post.title} />
-
-                      {/* Bookmark Button (Pushed to Far Right) */}
+                    {isLong && (
                       <button
-                        className="action-btn bookmark"
+                        className="read-more-btn"
+                        onClick={(e) => toggleExpand(post.id, e)}
+                      >
+                        {isExpanded ? " Show less" : " Read more"}
+                      </button>
+                    )}
+                  </p>
+
+                  <p className="post-author">
+                    By {post.author_name} • {timeAgo(post.created_at)}
+                  </p>
+
+                  <div className="post-actions">
+
+                    <div className="left-actions">
+
+                      {/* Like */}
+                      <button
+                        className="action-btn"
+                        onClick={(e) =>
+                          handleLikeToggle(post.id, e)
+                        }
+                      >
+                        <Heart
+                          size={18}
+                          fill={post.user_liked ? "#e33" : "none"}
+                          color={post.user_liked ? "#e33" : "#666"}
+                        />
+                        {post.like_count}
+                      </button>
+
+                      {/* Comment */}
+                      <button
+                        className="action-btn"
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          toggleBookmark(post.id);
+                          setActiveCommentPostId(post.id);
                         }}
                       >
-                        <Bookmark
-                          size={18}
-                          fill={post.user_bookmarked ? "#111" : "none"}
-                          color={post.user_bookmarked ? "#111" : "#666"}
-                        />
+                        <MessageCircle size={18} />
+                        {post.comment_count ?? 0}
                       </button>
-                    </div>
-                  </div>
-                </Link>
-              );
-            })
-          )}
-        </>
-      )}
 
-      {activeCommentPostId && (
-        <CommentSheet
-          postId={activeCommentPostId}
-          onClose={() => setActiveCommentPostId(null)}
-        />
-      )}
-    </div>
-  );
+                    </div>
+
+                    <ShareButton
+                      postId={post.id}
+                      postTitle={post.title}
+                    />
+
+                    {/* Bookmark */}
+                    <button
+                      className="action-btn bookmark"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleBookmark(post.id);
+                      }}
+                    >
+                      <Bookmark
+                        size={18}
+                        fill={post.user_bookmarked ? "#111" : "none"}
+                        color={post.user_bookmarked ? "#111" : "#666"}
+                      />
+                    </button>
+
+                  </div>
+                </div>
+              </Link>
+            );
+          })
+        )}
+      </>
+    )}
+
+    {activeCommentPostId && (
+      <CommentSheet
+        postId={activeCommentPostId}
+        onClose={() => setActiveCommentPostId(null)}
+      />
+    )}
+
+  </div>
+);
 }
