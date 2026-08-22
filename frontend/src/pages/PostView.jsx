@@ -7,6 +7,8 @@ import CommentSheet from '../components/CommentSheet';
 import DOMPurify from "dompurify";
 import './PostView.css';
 
+const API_URL = "https://sky-dlae.onrender.com";
+
 export default function PostView() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
@@ -22,12 +24,12 @@ export default function PostView() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/posts/${id}`)
+    axios.get(`${API_URL}/api/posts/${id}`)
       .then(res => setPost(res.data.post))
       .catch(() => setError('Post not found'));
 
     const token = localStorage.getItem('token');
-    axios.get(`http://localhost:5000/api/likes/${id}`, {
+    axios.get(`${API_URL}/api/likes/${id}`, {
       headers: token ? { Authorization: `Bearer ${token}` } : {}
     })
       .then(res => {
@@ -47,7 +49,7 @@ export default function PostView() {
     setLikeLoading(true);
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/likes/${id}`,
+        `${API_URL}/api/likes/${id}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -64,7 +66,7 @@ export default function PostView() {
     setDeleting(true);
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/posts/${id}`, {
+      await axios.delete(`${API_URL}/api/posts/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       navigate('/');
@@ -94,7 +96,7 @@ export default function PostView() {
           {post.image && (
         <img
           className="post-view__image"
-          src={`http://localhost:5000${post.image}`}
+          src={`${API_URL}${post.image}`}
           alt={post.title}
         />
       )}
