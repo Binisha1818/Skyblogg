@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { register, login, getProfile, forgotPassword, resetPassword, googleAuth } = require('../controllers/authControllers');
+const { register, login, getProfile, forgotPassword, resetPassword, googleAuth } = require('../controllers/authController');
 
 const protect = require('../middleware/authMiddleware');
 const { registerRules, loginRules, validate } = require('../middleware/validators');
