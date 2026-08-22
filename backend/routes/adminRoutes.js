@@ -9,7 +9,7 @@ const {
   deletePost,
   getAllComments,
   deleteComment
-} = require('../controllers/adminController');
+} = require('../controllers/admincontroller');
 
 router.get('/users', protect, adminOnly, getAllUsers);
 router.delete('/users/:id', protect, adminOnly, deleteUser);
