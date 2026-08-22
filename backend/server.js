@@ -13,7 +13,7 @@ const bookmarkRoutes = require("./routes/bookmarkRoutes");
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'https://skyy.onrender.com',
   credentials: true
 }));
 app.use(express.json());
