@@ -14,6 +14,7 @@ import Bookmark from "./pages/Bookmark";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   const [search, setSearch] = useState('');
@@ -29,6 +30,7 @@ return (
           />
 
           <Routes>
+               <Route path="/" element={<LandingPage />} />
             <Route path="/" element={<BlogList search={search} />} />
             <Route path="/blog" element={<BlogList search={search} />} />
             <Route path="/blog/:id" element={<PostView />} />
