@@ -180,7 +180,7 @@ const forgotPassword = async (req, res) => {
       [token, expiry, user.id]
     );
 
-    const resetLink = `http://localhost:5173/reset-password/${token}`;
+    const resetLink = `https://skyy.onrender.com/reset-password/${token}`;
 
     const html = `
       <h2>Password Reset</h2>
