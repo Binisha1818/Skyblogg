@@ -3,11 +3,13 @@ import axios from "axios";
 import './Bookmark.css';
 import { Bookmark } from "lucide-react";
 
+const API_URL = "https://sky-dlae.onrender.com";
+
 export default function Bookmarks({ posts, setPosts }) {
 const removeBookmark = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.post(`http://localhost:5000/api/bookmarks/${id}`, {}, {
+      await axios.post(`${API_URL}/api/bookmarks/${id}`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setPosts(prev => prev.filter(p => p.id !== id));
@@ -21,7 +23,7 @@ const removeBookmark = async (id) => {
         <div className="bookmark-card" key={post.id}>
           <Link to={`/blog/${post.id}`}>
             <img
-              src={`http://localhost:5000${post.image}`}
+              src={`${API_URL}${post.image}`}
               alt={post.title}
               className="bookmark-image"
             />
