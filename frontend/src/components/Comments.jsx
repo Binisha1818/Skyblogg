@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import './Comment.css';
 
 const MAX_INDENT_DEPTH = 4;
+const API_URL = "https://sky-dlae.onrender.com";
 
 function formatRelativeTime(dateStr) {
   const diffMs = Date.now() - new Date(dateStr).getTime();
@@ -51,7 +52,7 @@ export default function Comments({ postId }) {
 
   const fetchComments = useCallback(() => {
     const token = localStorage.getItem('token');
-    axios.get(`http://localhost:5000/api/posts/${postId}/comments`, {
+    axios.get(`${API_URL}/api/posts/${postId}/comments`, {
       headers: token ? { Authorization: `Bearer ${token}` } : {},
     })
       .then(res => setComments(res.data.comments))
@@ -78,7 +79,7 @@ export default function Comments({ postId }) {
 
     try {
       await axios.post(
-        `http://localhost:5000/api/posts/${postId}/comments`,
+        `${API_URL}/api/posts/${postId}/comments`,
         { content: newComment },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -103,7 +104,7 @@ export default function Comments({ postId }) {
 
     try {
       await axios.post(
-        `http://localhost:5000/api/comments/${commentId}/reply`,
+        `${API_URL}/api/comments/${commentId}/reply`,
         { content: replyText },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -128,7 +129,7 @@ export default function Comments({ postId }) {
       const token = localStorage.getItem('token');
 
       await axios.delete(
-        `http://localhost:5000/api/comments/${commentToDelete}`,
+        `${API_URL}/api/comments/${commentToDelete}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -149,7 +150,7 @@ export default function Comments({ postId }) {
     }
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/comments/${commentId}/like`,
+        `${API_URL}/api/comments/${commentId}/like`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
