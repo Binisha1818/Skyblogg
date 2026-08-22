@@ -4,6 +4,8 @@ import axios from 'axios';
 import './WritePost.css';
 import RichTextEditor from '../components/RichTextEditor';
 
+const API_URL = "https://sky-dlae.onrender.com";
+
 const CATEGORIES = [
   { key: "aviation_news", label: "Aviation News" },
   { key: "airlines", label: "Airlines" },
@@ -51,7 +53,7 @@ export default function WritePost() {
     formData.append('category', category);
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/posts', formData, {
+      await axios.post(`${API_URL}/api/posts`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
