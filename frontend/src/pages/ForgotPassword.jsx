@@ -1,16 +1,11 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./forgotPassword.css";
 
 const API_URL = "https://sky-dlae.onrender.com";
 
-export default function ResetPassword() {
-  const { token } = useParams();
-
-  const navigate = useNavigate();
-
-  const [password, setPassword] = useState("");
-
+export default function ForgotPassword() {
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
@@ -18,18 +13,11 @@ export default function ResetPassword() {
 
     try {
       const res = await axios.post(
-        `${API_URL}/api/auth/reset-password/${token}`,
-        {
-          password,
-        }
+        `${API_URL}/api/auth/forgot-password`,
+        { email }
       );
 
       setMessage(res.data.message);
-
-      setTimeout(() => {
-        navigate("/blog");
-      }, 2000);
-
     } catch (err) {
       setMessage(
         err.response?.data?.message || "Something went wrong."
@@ -38,22 +26,20 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="reset-container">
-      <h2>Reset Password</h2>
+    <div className="forgot-container">
+      <h2>Forgot Password</h2>
 
       <form onSubmit={handleSubmit}>
         <input
-          type="password"
-          placeholder="New Password"
-          value={password}
-          onChange={(e) =>
-            setPassword(e.target.value)
-          }
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
 
         <button type="submit">
-          Reset Password
+          Send Reset Link
         </button>
       </form>
 
