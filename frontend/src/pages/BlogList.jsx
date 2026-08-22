@@ -6,6 +6,8 @@ import CommentSheet from "../components/CommentSheet";
 import "./BlogList.css";
 import ShareButton from "./sharebutton";
 
+const API_URL = "https://sky-dlae.onrender.com";
+
 const CONTENT_CHAR_LIMIT = 150;
 
 const CATEGORIES = [
@@ -58,7 +60,7 @@ export default function BlogList({ search }) {
         if (activeCategory !== "all") params.append("category", activeCategory);
 
         const res = await axios.get(
-          `http://localhost:5000/api/posts?${params.toString()}`,
+          `${API_URL}/api/posts?${params.toString()}`,
           { headers: token ? { Authorization: `Bearer ${token}` } : {} }
         );
         setPosts(res.data.posts);
@@ -76,7 +78,7 @@ export default function BlogList({ search }) {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        `http://localhost:5000/api/bookmarks/${postId}`,
+        `${API_URL}/api/bookmarks/${postId}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -102,7 +104,7 @@ export default function BlogList({ search }) {
 
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/likes/${postId}`,
+        `${API_URL}/api/likes/${postId}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -182,7 +184,7 @@ export default function BlogList({ search }) {
                     {/* Image */}
                     {post.image && (
                       <img
-                        src={`http://localhost:5000${post.image}`}
+                        src={`${API_URL}${post.image}`}
                         alt={post.title}
                         className="post-image"
                       />
