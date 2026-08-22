@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 
+const API_URL = "https://sky-dlae.onrender.com";
+
 const Reply = ({ commentId }) => {
 
   const [reply, setReply] = useState("");
@@ -12,7 +14,7 @@ const Reply = ({ commentId }) => {
       const token = localStorage.getItem("token");
 
       await axios.post(
-        `http://localhost:5000/api/comments/${commentId}/replies`,
+        `${API_URL}/api/comments/${commentId}/replies`,
         {
           content: reply
         },
