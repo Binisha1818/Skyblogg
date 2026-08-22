@@ -18,7 +18,30 @@ const LandingPage = () => {
         
         </div>
       </nav>
+ {/* Airplane SVG */}
+        <div className="plane-wrapper">
+          <svg
+            className="airplane-svg"
+            viewBox="0 0 800 260"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M80 180 C220 90 380 210 520 120 C630 50 690 80 770 45"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeDasharray="6 8"
+              className="flight-path"
+            />
 
+            <g transform="translate(650 55) rotate(-25)">
+              <path
+                d="M0 18 L65 18 L90 30 L65 42 L0 42 L-22 65 L-32 65 L-20 42 L-65 42 L-82 55 L-92 55 L-78 30 L-92 5 L-82 5 L-65 18 L-20 18 L-32 -5 L-22 -5 Z"
+                fill="currentColor"
+              />
+            </g>
+          </svg>
+        </div>
       {/* Hero */}
       <main className="landing-hero">
         <div className="hero-glow glow-one"></div>
@@ -48,30 +71,7 @@ const LandingPage = () => {
         
         </div>
 
-        {/* Airplane SVG */}
-        <div className="plane-wrapper">
-          <svg
-            className="airplane-svg"
-            viewBox="0 0 800 260"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M80 180 C220 90 380 210 520 120 C630 50 690 80 770 45"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeDasharray="6 8"
-              className="flight-path"
-            />
-
-            <g transform="translate(650 55) rotate(-25)">
-              <path
-                d="M0 18 L65 18 L90 30 L65 42 L0 42 L-22 65 L-32 65 L-20 42 L-65 42 L-82 55 L-92 55 L-78 30 L-92 5 L-82 5 L-65 18 L-20 18 L-32 -5 L-22 -5 Z"
-                fill="currentColor"
-              />
-            </g>
-          </svg>
-        </div>
+       
 
         
       </main>
