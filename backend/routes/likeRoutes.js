@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { toggleLike, getLikeStatus } = require('../controllers/likecontroller');
+const { toggleLike, getLikeStatus } = require('../controllers/likeController');
 const protect = require('../middleware/authMiddleware');
 const optionalAuth = require('../middleware/optionalAuth');
 
