@@ -14,7 +14,8 @@
 .auth-modal {
   position: relative;
   width: 100%;
-  max-width: 460px;
+  max-width: 380px;
+  height:440px;
   background: #fff;
   border-radius: 22px;
   padding: 32px;
