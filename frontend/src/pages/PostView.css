@@ -1,0 +1,125 @@
+.post-view {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.post-view__image {
+  width: 70%;
+  max-height: 400px;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.post-view__author {
+  color: #666;
+  text-align:left;
+  font-size:14px;
+
+}
+
+.post-view__content {
+  white-space: pre-wrap;
+  margin-top: 20px;
+  line-height: 1.6;
+}
+.head{
+  line-height: 1.0;
+}
+.like-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 20px;
+  padding: 8px 16px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.15s ease;
+  border:none;
+}
+
+.comment-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: transparent;
+  cursor: pointer;
+  color: #333;
+  font-size: 14px;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+    margin-top:20px;
+    border:none;
+}
+
+.comment-trigger-btn:hover {
+  background-color: #f5f5f5;
+  border-color: #999;
+}
+.post-view__reactions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;   /* vertically centers both buttons regardless of height difference */
+  gap: 0.8px;
+
+}
+
+.post-act {
+  margin-top: 30px;
+  display: flex;
+  gap: 10px;
+}
+
+.post-act button,
+.post-act a button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+}
+
+.post-act .delete-btn {
+  background: #e33;
+  color: white;
+  border: none;
+}
+
+.post-act .delete-btn:hover {
+  background: #cc2929;
+
+.post-view__content {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #333;
+}
+
+.post-view__content p {
+  margin: 16px 0;
+}
+
+.post-view__content h1 {
+  font-size: 2.5rem;
+  margin: 20px 0;
+}
+
+.post-view__content h2 {
+  font-size: 2rem;
+  margin: 18px 0;
+}
+
+.post-view__content strong {
+  font-weight: 700;
+}
+
+.post-view__content ul,
+.post-view__content ol {
+  padding-left: 24px;
+}
+
+.post-view__content blockquote {
+  border-left: 4px solid #ddd;
+  padding-left: 16px;
+  color: #666;
+}

@@ -1,0 +1,277 @@
+.admin {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 16px 40px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .admin {
+    margin: 50px auto;
+    padding: 0 24px 60px;
+  }
+}
+
+.admin__heading {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .admin__heading {
+    font-size: 26px;
+    margin-bottom: 24px;
+  }
+}
+
+.admin__tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #eee;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none; /* Hide scrollbar for clean look on mobile */
+}
+
+.admin__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.admin__tab {
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #666;
+  border-bottom: 2px solid transparent;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .admin__tab {
+    padding: 10px 20px;
+  }
+}
+
+.admin__tab--active {
+  color: #111;
+  font-weight: 600;
+  border-bottom: 2px solid #111827;
+}
+
+.admin__loading {
+  color: #888;
+}
+
+/* Responsive Table Wrapper */
+.admin__table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.admin__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 600px; /* Prevents cramped columns on mobile */
+}
+
+.admin__table th {
+  text-align: left;
+  padding: 10px 12px;
+  color: #888;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #eee;
+}
+
+.admin__table td {
+  padding: 12px;
+  border-bottom: 1px solid #f2f2f2;
+  color: #333;
+}
+
+.admin__comment-text {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin__badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  background: #f0f0f0;
+  color: #555;
+}
+
+.admin__badge--admin {
+  background: #111827;
+  color: white;
+}
+
+.admin__badge--draft {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.admin__badge--published {
+  background: #d4edda;
+  color: #155724;
+}
+
+.admin__delete-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #374151, #000000);
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.admin__delete-btn:hover {
+  background: linear-gradient(135deg, #1f2937, #000000);
+}
+
+/* Modal Overlay */
+.admin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 16px;
+  box-sizing: border-box;
+  animation: fadeIn 0.25s ease;
+}
+
+/* Modal */
+.admin-modal {
+  width: 100%;
+  max-width: 430px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.18);
+  animation: popup 0.28s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .admin-modal {
+    padding: 30px;
+  }
+}
+
+.admin-modal h3 {
+  margin: 0;
+  font-size: 24px;
+  color: #111827;
+}
+
+@media (min-width: 768px) {
+  .admin-modal h3 {
+    font-size: 28px;
+  }
+}
+
+.admin-modal p {
+  margin: 14px 0 24px;
+  color: #6b7280;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+@media (min-width: 768px) {
+  .admin-modal p {
+    margin: 18px 0 30px;
+    font-size: 16px;
+  }
+}
+
+.admin-modal__actions {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+}
+
+@media (min-width: 480px) {
+  .admin-modal__actions {
+    flex-direction: row;
+    justify-content: center;
+    gap: 14px;
+  }
+}
+
+.admin-modal__cancel,
+.admin-modal__delete {
+  border: none;
+  border-radius: 10px;
+  padding: 11px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+@media (min-width: 480px) {
+  .admin-modal__cancel,
+  .admin-modal__delete {
+    width: auto;
+    padding: 11px 24px;
+  }
+}
+
+.admin-modal__cancel {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.admin-modal__cancel:hover {
+  background: #e5e7eb;
+  transform: translateY(-2px);
+}
+
+.admin-modal__delete {
+  background: #ef4444;
+  color: white;
+}
+
+.admin-modal__delete:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(239, 68, 68, 0.35);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popup {
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

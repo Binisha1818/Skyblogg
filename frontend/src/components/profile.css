@@ -1,0 +1,169 @@
+.profile-container {
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 0 16px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* User Info Header */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+.profile-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0f172a 0%, #2563eb 100%) !important;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.profile-name {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(135deg, #0f172a 0%, #334155 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  display: inline-block;
+}
+
+.profile-email {
+  margin: 4px 0 0 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* Navigation Tabs */
+.profile-tabs {
+  display: flex;
+  gap: 24px;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 32px;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 10px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.tab-btn.active {
+  color: #0f172a;
+}
+
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(135deg, #0f172a 0%, #2563eb 100%);
+}
+
+/* Post Items in Profile */
+.profile-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.profile-post-card {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.profile-post-image {
+  width: 180px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.profile-post-content {
+  flex: 1;
+}
+
+.profile-post-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  color: #0f172a;
+}
+
+.profile-post-meta {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0 0 10px 0;
+}
+
+.profile-post-excerpt {
+  font-size: 14px;
+  color: #334155;
+  margin: 0 0 14px 0;
+  line-height: 1.5;
+}
+
+/* Action Buttons */
+.profile-post-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-edit {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+  color: #334155 !important;
+  border: 1px solid #cbd5e1 !important;
+  transition: all 0.2s ease;
+}
+
+.btn-edit:hover {
+  background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 100%) !important;
+  color: #0f172a !important;
+}
+
+.btn-delete {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  background: #ef4444 !important;
+  color: #ffffff !important;
+  border: none !important;
+  transition: opacity 0.2s ease;
+}
+
+.btn-delete:hover {
+  opacity: 0.9;
+}
+
+.profile-empty {
+  color: #64748b;
+  font-size: 14px;
+  text-align: center;
+  padding: 40px 0;
+}
