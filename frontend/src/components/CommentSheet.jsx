@@ -4,6 +4,8 @@ import { X, Send, Heart } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import "./CommentSheet.css";
 
+const API_URL = "https://sky-dlae.onrender.com";
+
 const MAX_INDENT_DEPTH = 3;
 
 function formatRelativeTime(dateStr) {
@@ -64,7 +66,7 @@ export default function CommentSheet({ postId, onClose }) {
         : {};
 
       const res = await axios.get(
-        `http://localhost:5000/api/posts/${postId}/comments`,
+        `${API_URL}/api/posts/${postId}/comments`,
         config
       );
 
@@ -123,7 +125,7 @@ export default function CommentSheet({ postId, onClose }) {
     try {
       if (replyTarget) {
         await axios.post(
-          `http://localhost:5000/api/comments/${replyTarget.id}/reply`,
+          `${API_URL}/api/comments/${replyTarget.id}/reply`,
           {
             content: newComment,
           },
@@ -135,7 +137,7 @@ export default function CommentSheet({ postId, onClose }) {
         );
       } else {
         await axios.post(
-          `http://localhost:5000/api/posts/${postId}/comments`,
+          `${API_URL}/api/posts/${postId}/comments`,
           {
             content: newComment,
           },
@@ -174,7 +176,7 @@ export default function CommentSheet({ postId, onClose }) {
       const token = localStorage.getItem("token");
 
       await axios.delete(
-        `http://localhost:5000/api/comments/${commentToDelete}`,
+        `${API_URL}/api/comments/${commentToDelete}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -342,7 +344,7 @@ function SheetCommentItem({
 
     try {
       await axios.post(
-        `http://localhost:5000/api/comments/${comment.id}/like`,
+        `${API_URL}/api/comments/${comment.id}/like`,
         {},
         {
           headers: {
