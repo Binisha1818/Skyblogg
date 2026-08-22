@@ -4,6 +4,7 @@ import axios from 'axios';
 import RichTextEditor from '../components/RichTextEditor';
 import './WritePost.css'; // Reusing your Notion layout styles
 
+const API_URL = "https://sky-dlae.onrender.com";
 
 export default function EditPost() {
   const { id } = useParams();
@@ -20,7 +21,7 @@ export default function EditPost() {
 
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/posts/${id}`)
+    axios.get(`${API_URL}/api/posts/${id}`)
       .then(res => {
         setTitle(res.data.post.title || '');
         setContent(res.data.post.content || '');
@@ -60,7 +61,7 @@ export default function EditPost() {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:5000/api/posts/${id}`, formData, {
+      await axios.put(`${API_URL}/api/posts/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
@@ -124,7 +125,7 @@ export default function EditPost() {
             {(preview || currentImage) && (
               <div className="preview-container">
                 <img
-                  src={preview || `http://localhost:5000${currentImage}`}
+                  src={preview || `${API_URL}${currentImage}`}
                   alt="Cover Preview"
                   className="preview-image"
                 />
