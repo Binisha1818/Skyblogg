@@ -7,6 +7,8 @@ import './Dashboard.css';
 import DashboardLayout from '../components/Dashboardlayout';
 import Bookmark from './Bookmark';
 
+const API_URL = "https://sky-dlae.onrender.com";
+
 export default function Dashboard() {
   const [profile, setProfile] = useState(null);
   const [myPosts, setMyPosts] = useState([]);
@@ -29,7 +31,7 @@ export default function Dashboard() {
     const token = localStorage.getItem('token');
 
     axios.get(
-      'http://localhost:5000/api/posts/user/mine',
+      `${API_URL}/api/posts/user/mine`,
       {
         headers: {
           Authorization: `Bearer ${token}`
@@ -55,7 +57,7 @@ export default function Dashboard() {
         const token = localStorage.getItem('token');
 
         const res = await axios.get(
-          'http://localhost:5000/api/bookmarks',
+          `${API_URL}/api/bookmarks`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -82,7 +84,7 @@ export default function Dashboard() {
       const token = localStorage.getItem('token');
 
       await axios.delete(
-        `http://localhost:5000/api/posts/${postToDelete}`,
+        `${API_URL}/api/posts/${postToDelete}`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -115,7 +117,7 @@ export default function Dashboard() {
       <div className="post-card__image-wrapper">
         {post.image ? (
           <img
-            src={`http://localhost:5000${post.image}`}
+            src={`${API_URL}${post.image}`}
             alt={post.title}
             className="post-card__image"
           />
