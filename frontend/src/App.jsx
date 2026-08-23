@@ -60,7 +60,7 @@ function AppContent() {
             HOME / BLOG FEED
         ========================= */}
         <Route
-          path="/home"
+          path="/"
           element={
             <BlogList search={search} />
           }
