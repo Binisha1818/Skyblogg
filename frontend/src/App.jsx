@@ -1,7 +1,14 @@
 import { useState } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+
 import Opportunities from "./pages/opportunity";
 import PostOpportunity from "./pages/CreatePost";
+
 import { AuthProvider } from "./context/AuthContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
@@ -24,13 +31,13 @@ function AppContent() {
   const [search, setSearch] = useState("");
   const location = useLocation();
 
-  // Hide the existing Navbar only on the Landing Page
-  const showNavbar = location.pathname !== "/";
+  // Hide the main Navbar only on the landing page
+  const hideNavbar = location.pathname === "/";
 
   return (
     <>
-
-      {showNavbar && (
+      {/* Main Navbar - hidden on landing page */}
+      {!hideNavbar && (
         <Navbar
           search={search}
           setSearch={setSearch}
@@ -38,49 +45,93 @@ function AppContent() {
       )}
 
       <Routes>
-        {/* Opportunities */}
-  <Route path="/opportunity" element={<Opportunities />} />
 
-  {/* Post Opportunity */}
-  <Route
-    path="/CreatePost"
-    element={
-      <ProtectedRoute>
-        <PostOpportunity />
-      </ProtectedRoute>
-    }
-  />
-        {/* Landing Page */}
-        <Route path="/" element={<LandingPage />} />
+        {/* =========================
+            LANDING PAGE
+            No main Navbar
+        ========================= */}
+        <Route
+          path="/"
+          element={<LandingPage />}
+        />
 
-        {/* Existing Blog Feed */}
+
+        {/* =========================
+            HOME / BLOG FEED
+        ========================= */}
         <Route
           path="/home"
-          element={<BlogList search={search} />}
+          element={
+            <BlogList search={search} />
+          }
         />
 
         {/* Keep /blog working */}
         <Route
           path="/blog"
-          element={<BlogList search={search} />}
+          element={
+            <BlogList search={search} />
+          }
         />
 
-        {/* Blog Details */}
-        <Route path="/blog/:id" element={<PostView />} />
 
-        {/* Forgot Password */}
+        {/* =========================
+            BLOG DETAILS
+        ========================= */}
+        <Route
+          path="/blog/:id"
+          element={<PostView />}
+        />
+
+        <Route
+          path="/posts/:id"
+          element={<PostView />}
+        />
+
+
+        {/* =========================
+            OPPORTUNITIES
+        ========================= */}
+        <Route
+          path="/opportunity"
+          element={<Opportunities />}
+        />
+
+
+        {/* =========================
+            CREATE OPPORTUNITY
+        ========================= */}
+        <Route
+          path="/CreatePost"
+          element={
+            <ProtectedRoute>
+              <PostOpportunity />
+            </ProtectedRoute>
+          }
+        />
+
+
+        {/* =========================
+            FORGOT PASSWORD
+        ========================= */}
         <Route
           path="/forgot-password"
           element={<ForgotPassword />}
         />
 
-        {/* Reset Password */}
+
+        {/* =========================
+            RESET PASSWORD
+        ========================= */}
         <Route
           path="/reset-password/:token"
           element={<ResetPassword />}
         />
 
-        {/* Dashboard */}
+
+        {/* =========================
+            DASHBOARD
+        ========================= */}
         <Route
           path="/dashboard"
           element={
@@ -90,13 +141,19 @@ function AppContent() {
           }
         />
 
-        {/* Bookmarks */}
+
+        {/* =========================
+            BOOKMARK
+        ========================= */}
         <Route
           path="/bookmark"
           element={<Bookmark />}
         />
 
-        {/* Write Post */}
+
+        {/* =========================
+            WRITE POST
+        ========================= */}
         <Route
           path="/write"
           element={
@@ -106,7 +163,10 @@ function AppContent() {
           }
         />
 
-        {/* Admin */}
+
+        {/* =========================
+            ADMIN DASHBOARD
+        ========================= */}
         <Route
           path="/admin"
           element={
@@ -116,7 +176,10 @@ function AppContent() {
           }
         />
 
-        {/* Edit Post */}
+
+        {/* =========================
+            EDIT POST
+        ========================= */}
         <Route
           path="/posts/:id/edit"
           element={
@@ -126,11 +189,6 @@ function AppContent() {
           }
         />
 
-        {/* Post Details */}
-        <Route
-          path="/posts/:id"
-          element={<PostView />}
-        />
       </Routes>
     </>
   );
@@ -139,7 +197,9 @@ function AppContent() {
 
 function App() {
   return (
-    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+    <GoogleOAuthProvider
+      clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}
+    >
       <AuthProvider>
         <BrowserRouter>
           <AppContent />
