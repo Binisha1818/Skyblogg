@@ -12,12 +12,6 @@ const LandingPage = () => {
           <div className="logo-mark">✈</div>
           <span>SkyBlog</span>
         </div>
-
-        <div className="landing-nav-actions">
-         
-        
-        </div>
-      </nav>
  {/* Airplane SVG */}
         <div className="plane-wrapper">
           <svg
@@ -42,6 +36,12 @@ const LandingPage = () => {
             </g>
           </svg>
         </div>
+        <div className="landing-nav-actions">
+         
+        
+        </div>
+      </nav>
+
       {/* Hero */}
       <main className="landing-hero">
         <div className="hero-glow glow-one"></div>
@@ -55,6 +55,7 @@ const LandingPage = () => {
           <em>35,000 feet.</em>
         </h1>
 
+
         <p className="landing-description">
         
         </p>
@@ -62,7 +63,7 @@ const LandingPage = () => {
         <div className="landing-buttons">
           <button
             className="landing-primary-btn"
-            onClick={() => navigate("/blog")}
+            onClick={() => navigate("/home")}
           >
             Get Started
             <span>→</span>
@@ -72,8 +73,10 @@ const LandingPage = () => {
         </div>
 
        
-
-        
+        <div className="scroll-hint">
+          <span></span>
+          EXPLORE THE SKY
+        </div>
       </main>
     </div>
   );
