@@ -21,7 +21,7 @@ body {
 ========================= */
 
 .landing-page {
-  min-height: 100vh;
+  min-height: 70vh;
   overflow: hidden;
   position: relative;
 
@@ -73,8 +73,8 @@ body {
 
   position: absolute;
 
-  width: 700px;
-  height: 700px;
+  width: 1000px;
+  height: 600px;
 
   border-radius: 50%;
 
