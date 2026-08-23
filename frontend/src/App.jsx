@@ -30,7 +30,7 @@ return (
       />
 
       <Routes>
-           <Route path="/blog" element={<LandingPage />} />
+           <Route path="/" element={<LandingPage />} />
         <Route path="/" element={<BlogList search={search} />} />
         <Route path="/blog" element={<BlogList search={search} />} />
         <Route path="/blog/:id" element={<PostView />} />
