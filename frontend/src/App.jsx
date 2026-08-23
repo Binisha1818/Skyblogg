@@ -31,7 +31,7 @@ function App() {
 
           <Routes>
 
-            <Route path="/blog" element={<LandingPage />} />
+            <Route path="/ element={<LandingPage />} />
 
             <Route
               path="/"
