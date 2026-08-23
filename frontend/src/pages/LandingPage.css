@@ -21,7 +21,7 @@ body {
 ========================= */
 
 .landing-page {
-  min-height: 40;
+  min-height: 100vh;
   overflow: hidden;
   position: relative;
 
@@ -73,8 +73,8 @@ body {
 
   position: absolute;
 
-  width: 1000px;
-  height: 400px;
+  width: 700px;
+  height: 700px;
 
   border-radius: 50%;
 
@@ -132,7 +132,7 @@ body {
 }
 
 .logo-mark {
-  font-size: 25px;
+  font-size: 22px;
 
   color: #ff7b6b;
 
@@ -324,7 +324,7 @@ body {
   max-width: 1000px;
 
   margin: 10px 0 22px;
-
+margin-top:63px;
   font-family: Georgia, "Times New Roman", serif;
 
   font-size: clamp(62px, 8.5vw, 125px);
@@ -487,9 +487,9 @@ body {
 ========================= */
 
 .plane-wrapper {
-  width:500px;
+  width: min(1000px, 100%);
 
-  margin-top: 25px;
+  margin-top: 60px;
 
   color: #398cbe;
 
@@ -502,7 +502,7 @@ body {
 }
 
 .airplane-svg {
-  width: 40%;
+  width: 80%;
   height: auto;
 
   display: block;
@@ -778,7 +778,7 @@ body {
   }
 
   .plane-wrapper {
-    width: 105%;
+    width: 115%;
     margin-top: 30px;
   }
 }
@@ -883,7 +883,7 @@ body {
     width: 150%;
     max-width: none;
 
-    margin-top: 60px;
+    margin-top: 25px;
 
     transform:
       translateX(10%)
@@ -941,7 +941,7 @@ body {
 
   .landing-primary-btn,
   .landing-secondary-btn {
-    min-height: 40px;
+    min-height: 50px;
     font-size: 14px;
   }
 
