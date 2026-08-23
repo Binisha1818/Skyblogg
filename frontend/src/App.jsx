@@ -1,169 +1,84 @@
-import { useState } from "react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { AuthProvider } from "./context/AuthContext";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-
-import Navbar from "./components/Navbar";
-import ProtectedRoute from "./components/ProtectedRoute";
-
-import LandingPage from "./pages/LandingPage";
-import BlogList from "./pages/BlogList";
-import Dashboard from "./pages/Dashboard";
-import WritePost from "./pages/WritePost";
-import PostView from "./pages/PostView";
-import EditPost from "./pages/EditPost";
-import AdminDashboard from "./pages/AdminDashboard";
+import { AuthProvider } from './context/AuthContext';
+import Navbar from './components/Navbar';
+import Dashboard from './pages/Dashboard';
+import ProtectedRoute from './components/ProtectedRoute';
+import WritePost from './pages/WritePost';
+import PostView from './pages/PostView';
+import BlogList from './pages/BlogList';
+import EditPost from './pages/EditPost';
+import AdminDashboard from './pages/AdminDashboard';
 import Bookmark from "./pages/Bookmark";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
-
-import Opportunities from "./pages/opportunity";
-import PostOpportunity from "./pages/CreatePost";
-
-
-function AppContent() {
-  const [search, setSearch] = useState("");
-  const location = useLocation();
-
-  // Hide the main Navbar only on the landing page
-  const hideNavbar = location.pathname === "/";
-
-  return (
-    <>
-      {!hideNavbar && (
-        <Navbar
-          search={search}
-          setSearch={setSearch}
-        />
-      )}
-
-      <Routes>
-
-        {/* Landing Page */}
-        <Route
-          path="/"
-          element={<LandingPage />}
-        />
-
-        {/* Blog Feed */}
-        <Route
-          path="/blog"
-          element={
-            <BlogList search={search} />
-          }
-        />
-
-        {/* Blog Details */}
-        <Route
-          path="/blog/:id"
-          element={<PostView />}
-        />
-
-        {/* Opportunities */}
-        <Route
-          path="/opportunity"
-          element={<Opportunities />}
-        />
-
-        {/* Create Opportunity */}
-        <Route
-          path="/CreatePost"
-          element={
-            <ProtectedRoute>
-              <PostOpportunity />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* Forgot Password */}
-        <Route
-          path="/forgot-password"
-          element={<ForgotPassword />}
-        />
-
-        {/* Reset Password */}
-        <Route
-          path="/reset-password/:token"
-          element={<ResetPassword />}
-        />
-
-        {/* Dashboard */}
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* Bookmarks */}
-        <Route
-          path="/bookmark"
-          element={<Bookmark />}
-        />
-
-        {/* Write Post */}
-        <Route
-          path="/write"
-          element={
-            <ProtectedRoute>
-              <WritePost />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* Admin Dashboard */}
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* Edit Post */}
-        <Route
-          path="/posts/:id/edit"
-          element={
-            <ProtectedRoute>
-              <EditPost />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* Post Details */}
-        <Route
-          path="/posts/:id"
-          element={<PostView />}
-        />
-
-      </Routes>
-    </>
-  );
-}
-
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function App() {
-  return (
-    <GoogleOAuthProvider
-      clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}
-    >
+  const [search, setSearch] = useState('');
+
+return (
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
       <AuthProvider>
         <BrowserRouter>
-          <AppContent />
+
+          <Navbar
+            search={search}
+            setSearch={setSearch}
+          />
+
+          <Routes>
+            <Route path="/" element={<BlogList search={search} />} />
+            <Route path="/blog" element={<BlogList search={search} />} />
+            <Route path="/blog/:id" element={<PostView />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
+
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/bookmark" element={<Bookmark />} />
+
+            <Route
+              path="/write"
+              element={
+                <ProtectedRoute>
+                  <WritePost />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/posts/:id/edit"
+              element={
+                <ProtectedRoute>
+                  <EditPost />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route path="/posts/:id" element={<PostView />} />
+          </Routes>
+
         </BrowserRouter>
       </AuthProvider>
     </GoogleOAuthProvider>
   );
 }
-
 
 export default App;
