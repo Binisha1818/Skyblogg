@@ -17,71 +17,99 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import LandingPage from "./pages/LandingPage";
 
 function App() {
-const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('');
 
-return (
-<GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-<AuthProvider>
-<BrowserRouter>
+  return (
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+      <AuthProvider>
+        <BrowserRouter>
 
-      <Navbar
-        search={search}
-        setSearch={setSearch}
-      />
+          <Navbar
+            search={search}
+            setSearch={setSearch}
+          />
 
-      <Routes>
-           <Route path="/" element={<LandingPage />} />
-        <Route path="/" element={<BlogList search={search} />} />
-        <Route path="/blog" element={<BlogList search={search} />} />
-        <Route path="/blog/:id" element={<PostView />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Routes>
 
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/bookmark" element={<Bookmark />} />
+            <Route path="/blog" element={<LandingPage />} />
 
-        <Route
-          path="/write"
-          element={
-            <ProtectedRoute>
-              <WritePost />
-            </ProtectedRoute>
-          }
-        />
+            <Route
+              path="/"
+              element={<BlogList search={search} />}
+            />
 
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
+            <Route
+              path="/blog"
+              element={<BlogList search={search} />}
+            />
 
-        <Route
-          path="/posts/:id/edit"
-          element={
-            <ProtectedRoute>
-              <EditPost />
-            </ProtectedRoute>
-          }
-        />
+            <Route
+              path="/blog/:id"
+              element={<PostView />}
+            />
 
-        <Route path="/posts/:id" element={<PostView />} />
-      </Routes>
+            <Route
+              path="/forgot-password"
+              element={<ForgotPassword />}
+            />
 
-    </BrowserRouter>
-  </AuthProvider>
-</GoogleOAuthProvider>
+            <Route
+              path="/reset-password/:token"
+              element={<ResetPassword />}
+            />
 
-);
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/bookmark"
+              element={<Bookmark />}
+            />
+
+            <Route
+              path="/write"
+              element={
+                <ProtectedRoute>
+                  <WritePost />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/posts/:id/edit"
+              element={
+                <ProtectedRoute>
+                  <EditPost />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/posts/:id"
+              element={<PostView />}
+            />
+
+          </Routes>
+
+        </BrowserRouter>
+      </AuthProvider>
+    </GoogleOAuthProvider>
+  );
 }
 
 export default App;
